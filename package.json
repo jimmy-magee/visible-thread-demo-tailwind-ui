@@ -1,10 +1,10 @@
 {
-  "name": "vite-react-typescript-tailwind-starter",
-  "version": "0.0.0",
+  "name": "visible-thread-tailwind-ui",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --base https://construction.enterprise-cloud.io/supplier-spa/",
-    "serve": "vite preview --port 3000",
+    "build": "vite build --base https://visible-thread.com/visible-thread-tailwind-ui/",
+    "serve": "vite preview --port 8081",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "prepare": "husky install",
     "test": "jest"
