@@ -38,7 +38,7 @@ const Team: React.FC = () => {
     useEffect(() => {
         setOrganisationId(params.organisationId);
         getTeam(params.organisationId, params.teamId);
-        populateUserSelectOptions(params.organisationId);
+        getAllOrganisationUsers(params.organisationId);
     }, []);
 
     const getTeam = (organisationId: string, id: string) => {
@@ -79,7 +79,7 @@ const Team: React.FC = () => {
             });
     };
 
-    const populateUserSelectOptions = (organisationId: string | null) => {
+    const getAllOrganisationUsers = (organisationId: string | null) => {
         if(organisationId == null || organisationId == '') {
             return
         }
@@ -87,7 +87,6 @@ const Team: React.FC = () => {
             .then((response: any) => {
                 console.log(response.data);
                 setOrganisationUsers(response.data);
-                getOptions();
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -96,11 +95,11 @@ const Team: React.FC = () => {
 
 
     const addUserToTeam = () => {
-        console.log('Adding user ', selectedOption.value);
-        console.log('to team', currentTeam.id);
+       
         TeamService.addUser(organisationId, currentTeam.id, selectedOption.value)
             .then((response: any) => {
                 console.log(response.data);
+                setCurrentTeam(response.data)
                 setMessage("The team was updated successfully!");
             })
             .catch((e: Error) => {
@@ -109,24 +108,16 @@ const Team: React.FC = () => {
     };
 
     const removeUserFromTeam = (userId: string) => {
-        console.log('Removing user ', userId);
-        console.log('from team', currentTeam.id);
         TeamService.removeUser(organisationId, currentTeam.id, userId)
             .then((response: any) => {
                 console.log(response.data);
+                setCurrentTeam(response.data)
                 setMessage("The team was updated successfully!");
             })
             .catch((e: Error) => {
                 console.log(e);
             });
     };
-
-    const getOptions = () => {
-        organisationUsers.map((user, index) => (
-         { value: user.id, label: user.firstname }
-    ));
-    }
-
 
 
     const updateTeam = () => {
@@ -161,12 +152,12 @@ const Team: React.FC = () => {
                     <h4>Team</h4>
                     <form>
                         <div className="form-group">
-                            <label htmlFor="title">Team Name</label>
+                            <label htmlFor="name">Team Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="title"
-                                name="title"
+                                id="name"
+                                name="name"
                                 value={currentTeam.name}
                                 onChange={handleInputChange}
                             />
@@ -300,87 +291,6 @@ const Team: React.FC = () => {
                 <div>
                     <br/>
                     <p>Please click on a Team...</p>
-
-                    <Menu as="div" className="relative inline-block text-left">
-                        <div>
-                            <Menu.Button
-                                className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                                Options
-                                <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true"/>
-                            </Menu.Button>
-                        </div>
-
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items
-                                className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
-                                    <Menu.Item>
-                                        {({active}) => (
-                                            <a
-                                                href="#"
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )}
-                                            >
-                                                Account settings
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                        {({active}) => (
-                                            <a
-                                                href="#"
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )}
-                                            >
-                                                Support
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                        {({active}) => (
-                                            <a
-                                                href="#"
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )}
-                                            >
-                                                License
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <form method="POST" action="#">
-                                        <Menu.Item>
-                                            {({active}) => (
-                                                <button
-                                                    type="submit"
-                                                    className={classNames(
-                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block w-full text-left px-4 py-2 text-sm'
-                                                    )}
-                                                >
-                                                    Sign out
-                                                </button>
-                                            )}
-                                        </Menu.Item>
-                                    </form>
-                                </div>
-                            </Menu.Items>
-                        </Transition>
-                    </Menu>
-
 
                 </div>
             )}
