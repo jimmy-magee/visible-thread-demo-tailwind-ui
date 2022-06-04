@@ -63,14 +63,14 @@ const User: React.FC = () => {
             });
     };
 
-    const downloadVTDocX = (id: string) => {
+    const downloadVTDocX = (id: string, fileName: string) => {
         console.log('Download VTDoc..', id, currentUser.id, organisationId);
         VTDocService.downloadVTDocById(organisationId, currentUser.id, id)
             .then((response: any) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'file.txt'); //or any other extension
+                link.setAttribute('download', fileName); //or any other extension
                 document.body.appendChild(link);
                 link.click();
             })
@@ -275,7 +275,7 @@ const User: React.FC = () => {
                                         <button
                                             type="submit"
                                             className="badge badge-success"
-                                            onClick={() => downloadVTDocX(user.id)}
+                                            onClick={() => downloadVTDocX(user.id, user.fileName)}
                                             //onClick={() => downloadVTDoc(`${user.organisationId}`, `${user.teamId}`, `${user.userId}`, `${user.id}`)}
                                         >
                                             Download
