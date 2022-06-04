@@ -228,7 +228,8 @@ const Team: React.FC = () => {
                                                       className="text-indigo-600 hover:text-indigo-900">
                                                     View<span className="sr-only">, {user.lastname}</span>
                                                 </Link>
-                                             
+                                                <button onClick={() => removeUserFromTeam(user.id)}>Delete</button>
+
                                             </td>
                                         </tr>
                                     ))}

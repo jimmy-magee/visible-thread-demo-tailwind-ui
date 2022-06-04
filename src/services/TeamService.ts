@@ -29,7 +29,7 @@ const addUser = (organisationId: string, teamId: string, userId: string) => {
 
 const removeUser = (organisationId: string, teamId: string, userId: string) => {
   console.log('Updating organisation ', organisationId, 'team  ', teamId, 'removing user ', userId)
-  return http.post<ITeam>(`/${organisationId}/teams/${teamId}/users/remove/${userId}`);
+  return http.delete<ITeam>(`/${organisationId}/teams/${teamId}/users/remove/${userId}`);
 };
 
 const remove = (organisationId: string, id: any) => {
