@@ -49,8 +49,9 @@ const update = (organisationId: string, id: string, data: IVTDoc) => {
   return http.post<IVTDoc>(`/${organisationId}/teams/${id}`, data);
 };
 
-const remove = (organisationId: string, id: any) => {
-  return http.delete<any>(`/${organisationId}/teams/${id}`);
+const remove = (organisationId: string, userId: string, id: any) => {
+  //vtdocs/{organisationId}/users/{userId}/{id}
+  return http.delete<any>(`/vtdocs/${organisationId}/users/${userId}/${id}`);
 };
 
 const findByName = (organisationId: string, name: string) => {

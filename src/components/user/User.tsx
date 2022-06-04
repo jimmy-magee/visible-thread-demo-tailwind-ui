@@ -63,7 +63,7 @@ const User: React.FC = () => {
             });
     };
 
-    const downloadVTDocX = (id: string, fileName: string) => {
+    const downloadVTDoc = (id: string, fileName: string) => {
         console.log('Download VTDoc..', id, currentUser.id, organisationId);
         VTDocService.downloadVTDocById(organisationId, currentUser.id, id)
             .then((response: any) => {
@@ -73,6 +73,19 @@ const User: React.FC = () => {
                 link.setAttribute('download', fileName); //or any other extension
                 document.body.appendChild(link);
                 link.click();
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
+
+    };
+
+    const deleteVTDoc = (id: string, fileName: string) => {
+        console.log('Delete VTDoc..', id, fileName, currentUser.id, organisationId);
+        VTDocService.remove(organisationId, currentUser.id, id)
+            .then((response: any) => {
+                console.log(response);
+                getUserVTDocs(organisationId, currentUser.id);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -275,10 +288,16 @@ const User: React.FC = () => {
                                         <button
                                             type="submit"
                                             className="badge badge-success"
-                                            onClick={() => downloadVTDocX(user.id, user.fileName)}
-                                            //onClick={() => downloadVTDoc(`${user.organisationId}`, `${user.teamId}`, `${user.userId}`, `${user.id}`)}
+                                            onClick={() => downloadVTDoc(user.id, user.fileName)}
                                         >
                                             Download
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className="badge badge-success"
+                                            onClick={() => deleteVTDoc(user.id, user.fileName)}
+                                        >
+                                            Delete
                                         </button>
                                     </td>
                                 </tr>
