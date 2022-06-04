@@ -3,7 +3,7 @@ import IUser from "../types/User"
 
 const getAll = (organisationId: string) => {
   console.log('Organisation Service getAll()')
-  return http.get<Array<IUser>>(`/:organisationId/users`);
+  return http.get<Array<IUser>>(`/${organisationId}/users`);
 };
 
 const get = (organisationId: string, id: string) => {
