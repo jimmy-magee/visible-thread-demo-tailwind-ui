@@ -148,7 +148,10 @@ const Team: React.FC = () => {
     return (
         <div>
             {currentTeam ? (
+
                 <div className="edit-form">
+                    <Link to={`/${currentTeam.organisationId}/teams/${currentTeam.id}/users`}>Add User</Link>
+
                     <h4>Team</h4>
                     <form>
                         <div className="form-group">

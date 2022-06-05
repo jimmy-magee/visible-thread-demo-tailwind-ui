@@ -35,6 +35,7 @@ const App: React.FC = () => {
               <Route path="organisations/:id" element={<Organisation />} />
               <Route path=":organisationId/teams/:teamId" element={<Team />} />
               <Route path=":organisationId/users/:userId" element={<User />} />
+              <Route path=":organisationId/teams/:teamId/users" element={<AddUser />} />
               <Route path="dashboard" element={<Dashboard />} >
                    <Route path="projects" element={< ProjectContainer />}>
                     <Route path=":projectId" element={<ProjectDetails />} >
