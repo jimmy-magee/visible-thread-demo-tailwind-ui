@@ -4,23 +4,21 @@ import IOrganisationData from '../../types/Organisation';
 
 const AddOrganisation: React.FC = () => {
   const initialOrganisationState = {
-    id: null,
     name: "",
-    description: "",
-    published: false
+    description: ""
   };
-  const [supplier, setOrganisation] = useState<IOrganisationData>(initialOrganisationState);
+  const [organisation, setOrganisation] = useState<IOrganisationData>(initialOrganisationState);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setOrganisation({ ...supplier, [name]: value });
+    setOrganisation({ ...organisation, [name]: value });
   };
 
   const saveOrganisation = () => {
     var data = {
-      name: supplier.name,
-      description: supplier.description
+      name: organisation.name,
+      description: organisation.description
     };
 
     OrganisationDataService.create(data)
@@ -28,8 +26,7 @@ const AddOrganisation: React.FC = () => {
         setOrganisation({
           id: response.data.id,
           name: response.data.name,
-          description: response.data.description,
-          published: response.data.published
+          description: response.data.description
         });
         setSubmitted(true);
         console.log(response.data);
@@ -62,7 +59,7 @@ const AddOrganisation: React.FC = () => {
               className="form-control"
               id="name"
               required
-              value={supplier.name}
+              value={organisation.name}
               onChange={handleInputChange}
               name="name"
             />
@@ -75,7 +72,7 @@ const AddOrganisation: React.FC = () => {
               className="form-control"
               id="description"
               required
-              value={supplier.description}
+              value={organisation.description}
               onChange={handleInputChange}
               name="description"
             />

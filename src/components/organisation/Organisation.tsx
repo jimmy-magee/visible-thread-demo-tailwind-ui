@@ -225,7 +225,7 @@ const Organisation: React.FC = () => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Organisation...</p>
+          <p> Add Team</p>
         </div>
       )}
     </div>

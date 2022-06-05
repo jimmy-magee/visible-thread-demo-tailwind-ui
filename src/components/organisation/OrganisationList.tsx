@@ -90,6 +90,7 @@ const OrganisationList: React.FC = () => {
       </div>
       <div className="col-md-6">
         <h4>Organisation List</h4>
+          <Link to="/organisation/add"> Add Organisation</Link>
 
         <ul className="list-group">
           {organisations &&
