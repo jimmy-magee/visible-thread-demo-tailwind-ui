@@ -1,16 +1,11 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import TeamService from "../../services/TeamService";
 import ITeam from '../../types/Team';
 import IUser from '../../types/User';
 
-type Props = RouteComponentProps<RouterProps>;
 
-interface RouterProps { // type for `match.params`
-  organisationId: string; // must be type `string` since value comes from the URL
-}
-
-const AddTeam: React.FC<Props> = (props: Props) => {
+const AddTeam: React.FC = (p) => {
   const initialTeamState = {
     id: null,
     organisationId: "",
@@ -23,9 +18,11 @@ const AddTeam: React.FC<Props> = (props: Props) => {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [organisationId, setOrganisationId] = useState<string>("");
 
+  let params = useParams();
+
   useEffect(() => {
-      setOrganisationId(props.match.params.organisationId);
-   }, [props.match.params.organisationId]);
+      setOrganisationId(params.organisationId);
+   }, [params.organisationId]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

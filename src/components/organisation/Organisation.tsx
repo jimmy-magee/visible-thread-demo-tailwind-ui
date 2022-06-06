@@ -153,7 +153,9 @@ const Organisation: React.FC = () => {
           </form>
 
           <h4>Teams</h4>
-
+            <Link to={`/${currentOrganisation.id}/team/add`} className="text-indigo-600 hover:text-indigo-900">
+                Add Team<span className="sr-only"></span>
+            </Link>
            {teams && teams.length > 0 &&
                      <table className="min-w-full divide-y divide-gray-300">
                                      <thead className="bg-gray-50">
@@ -215,6 +217,7 @@ const Organisation: React.FC = () => {
           >
             Update
           </button>
+
           <p>{message}</p>
 
 
