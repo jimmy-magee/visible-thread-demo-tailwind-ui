@@ -33,8 +33,8 @@ import User from "./components/user/User";
 import UserList from "./components/user/UserList";
 
 const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
+    { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
+    { name: 'Team', href: '/:organisationId/teams', icon: UsersIcon, current: false },
     { name: 'Projects', href: '#', icon: FolderIcon, current: false },
     { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
     { name: 'Documents', href: '#', icon: InboxIcon, current: false },
@@ -47,7 +47,7 @@ function classNames(...classes) {
 
 const App: React.FC = () => {
 
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
 
@@ -110,9 +110,9 @@ const App: React.FC = () => {
                                     </div>
                                     <nav className="mt-5 px-2 space-y-1">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
+                                                to={item.href}
                                                 className={classNames(
                                                     item.current
                                                         ? 'bg-gray-100 text-gray-900'
@@ -128,7 +128,7 @@ const App: React.FC = () => {
                                                     aria-hidden="true"
                                                 />
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </nav>
                                 </div>
@@ -231,7 +231,7 @@ const App: React.FC = () => {
 
                                 <Routes>
 
-                                    <Route path="organisations" element={<OrganisationList />} />
+                                    <Route path="/" element={<OrganisationList />} />
                                     <Route path="organisations/:id" element={<Organisation />} />
                                     <Route path="organisation/add" element={<AddOrganisation />} />
                                     <Route path=":organisationId/teams/:teamId" element={<Team />} />
