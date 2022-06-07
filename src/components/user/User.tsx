@@ -147,15 +147,23 @@ const User: React.FC = () => {
     };
 
     const updateUser = () => {
-        /*
-         UserService.update(currentUser.id, currentUser)
+
+        var data = {
+            id: currentUser.id,
+            firstName: currentUser.firstname,
+            lastName: currentUser.lastname,
+            email: currentUser.email,
+            published: status
+        };
+
+         UserService.update(currentUser.organisationId, currentUser.id, data)
            .then((response: any) => {
              console.log(response.data);
-             setMessage("The supplier was updated successfully!");
+             setMessage("The user was updated successfully!");
            })
            .catch((e: Error) => {
              console.log(e);
-           });*/
+           });
     };
 
     const deleteUser = () => {
@@ -163,7 +171,7 @@ const User: React.FC = () => {
         let navigate = useNavigate();
         UserService.remove(organisationId, currentUser.id)
             .then((response: any) => {
-                navigate("/suppliers");
+                navigate("/users");
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -184,7 +192,7 @@ const User: React.FC = () => {
                                 className="form-control"
                                 id="firstname"
                                 name="firstname"
-                                value={currentUser.firstname}
+                                value={currentUser.firstname || ""}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -196,7 +204,7 @@ const User: React.FC = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="lastname"
                                 name="lastname"
-                                value={currentUser.lastname}
+                                value={currentUser.lastname || ""}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -207,7 +215,7 @@ const User: React.FC = () => {
                                 className="form-control"
                                 id="email"
                                 name="email"
-                                value={currentUser.email}
+                                value={currentUser.email || ""}
                                 onChange={handleInputChange}
                             />
                         </div>
