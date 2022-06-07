@@ -145,6 +145,10 @@ const Team: React.FC = () => {
             });
     };
 
+    const selectOptions = () => {
+
+    }
+
     return (
         <div>
             {currentTeam ? (
@@ -184,6 +188,35 @@ const Team: React.FC = () => {
                             {currentTeam.published ? "Published" : "Pending"}
                         </div>
                     </form>
+
+                    <div className="flexbox">
+                        <br/>
+                        <p>Add User to Team...</p>
+
+
+
+                        <Select options={
+
+                            organisationUsers.map((user, index) => (
+                                //console.log('Adding user ', user.firstname, ' to select options');
+                                { value: user.id, label: user.firstname }
+                            ))
+                        }
+                                className="relative inline-block px-4 py-4"
+                                components={{Input}}
+                                defaultValue={selectedOption}
+                                onChange={setSelectedOption}
+                        />
+
+                        {selectedOption &&
+                            <div>
+                                <p>Selected Option: {selectedOption.value}</p>
+                                <button onClick={addUserToTeam}> Add to Team</button>
+                            </div>
+                        }
+
+
+                    </div>
 
                     {currentTeam.users && currentTeam.users.length > 0 &&
                         <div>
@@ -230,32 +263,7 @@ const Team: React.FC = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="flexbox">
-                                <br/>
-                                <p>Add User to Team...</p>
 
-
-
-                                <Select options={
-                                    organisationUsers.map((user, index) => (
-                                          { value: user.id, label: user.firstname }
-                                      ))
-                                     }
-                                        className="relative inline-block px-4 py-4"
-                                        components={{Input}}
-                                        defaultValue={selectedOption}
-                                        onChange={setSelectedOption}
-                                />
-
-                                {selectedOption &&
-                                    <div>
-                                        <p>Selected Option: {selectedOption.value}</p>
-                                        <button onClick={addUserToTeam}> Add to Team</button>
-                                    </div>
-                                }
-
-
-                            </div>
                         </div>
 
 
