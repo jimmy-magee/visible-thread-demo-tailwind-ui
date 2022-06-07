@@ -170,13 +170,20 @@ const Team: React.FC = () => {
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label>
-                                <strong>Status:</strong>
-                            </label>
-                            {currentTeam.published ? "Published" : "Pending"}
-                        </div>
                     </form>
+
+                    <button className="badge badge-danger mr-2" onClick={deleteTeam}>
+                        Delete
+                    </button>
+
+                    <button
+                        type="submit"
+                        className="badge badge-success"
+                        onClick={updateTeam}
+                    >
+                        Update
+                    </button>
+                    <p>{message}</p>
 
 
                     {currentTeam.users && currentTeam.users.length > 0 &&
@@ -340,39 +347,11 @@ const Team: React.FC = () => {
 
                     }
 
-                    {currentTeam.published ? (
-                        <button
-                            className="badge badge-primary mr-2"
-                            onClick={() => updatePublished(false)}
-                        >
-                            UnPublish
-                        </button>
-                    ) : (
-                        <button
-                            className="badge badge-primary mr-2"
-                            onClick={() => updatePublished(true)}
-                        >
-                            Publish
-                        </button>
-                    )}
-
-                    <button className="badge badge-danger mr-2" onClick={deleteTeam}>
-                        Delete
-                    </button>
-
-                    <button
-                        type="submit"
-                        className="badge badge-success"
-                        onClick={updateTeam}
-                    >
-                        Update
-                    </button>
-                    <p>{message}</p>
                 </div>
             ) : (
                 <div>
                     <br/>
-                    <p>Please click on a Team...</p>
+                    <p>Please select a Team...</p>
 
                 </div>
             )}
