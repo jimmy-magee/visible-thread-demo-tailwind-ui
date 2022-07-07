@@ -38,3 +38,7 @@ yarn
 yarn dev
 yarn test
 ```
+
+To Do
+
+layout - outlet and view full page.

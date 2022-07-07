@@ -28,9 +28,11 @@ const User: React.FC = () => {
     const [organisationId, setOrganisationId] = useState<string>("");
     const [userId, setUserId] = useState<string>("");
     const [currentUser, setCurrentUser] = useState<IUser>(initialUserState);
+    const [currentUserImage, setCurrentUserImage] = useState<[]>([]);
     const [message, setMessage] = useState<string>("");
 
     const [userVTDocs, setUserVTDocs] = useState<IVTDoc[]>([]);
+    const [userImage, setUserImage] = useState<any>(null);
     const [uploadFileList, setUploadFileList] = useState<FileList | null>(null);
     const params = useParams();
 
@@ -38,14 +40,26 @@ const User: React.FC = () => {
         setOrganisationId(params.organisationId);
         setUserId(params.userId)
         getUser(params.organisationId, params.userId);
+        getUserImage(params.organisationId, params.userId);
         getUserVTDocs(params.organisationId, params.userId);
     }, []);
 
     const getUser = (organisationId: string, id: string) => {
-        UserService.get(organisationId, id)
+        UserService.getUser(organisationId, id)
             .then((response: any) => {
-                setCurrentUser(response.data);
                 console.log(response.data);
+                setCurrentUser(response.data)
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
+    };
+
+    const getUserImage = (organisationId: string, id: string) => {
+        UserService.getUserImage(organisationId, id)
+            .then((response: any) => {
+                console.log(response.data);
+                setCurrentUserImage(response.data)
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -79,6 +93,7 @@ const User: React.FC = () => {
             });
 
     };
+
 
     const deleteVTDoc = (id: string, fileName: string) => {
         console.log('Delete VTDoc..', id, fileName, currentUser.id, organisationId);
@@ -180,10 +195,16 @@ const User: React.FC = () => {
 
 
     return (
-        <div>
+        <div className="relative h-full max-w-7xl mx-auto">
             {currentUser ? (
-                <div className="edit-form">
+                <div className="edit-form h-full overflow-x-auto">
                     <h4>User</h4>
+                    <div className="h-10 w-10 flex-shrink-0">
+                        <img className="h-10 w-10 rounded-full"
+                             src={`http://localhost:8080/api/v1/vtdocs/${currentUser.organisationId}/users/${currentUser.id}/${currentUser.imageId}/download`} alt="hello"/>
+                    </div>
+
+
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div className="form-group">
                             <label htmlFor="firstname">First Name</label>

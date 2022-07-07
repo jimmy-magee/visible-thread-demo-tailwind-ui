@@ -1,4 +1,5 @@
 import http from "../http-common";
+import axios from "axios";
 import IUser from "../types/User"
 
 const getAll = (organisationId: string) => {
@@ -6,8 +7,17 @@ const getAll = (organisationId: string) => {
   return http.get<Array<IUser>>(`/${organisationId}/users`);
 };
 
-const get = (organisationId: string, id: string) => {
+const getUser = (organisationId: string, id: string) => {
   return http.get<IUser>(`/${organisationId}/users/${id}`);
+};
+
+const getUserImage = (organisationId: string, id: string) => {
+  return http.get<any>(`/${organisationId}/users/${id}`);
+};
+
+const downloadUserImageById = (organisationId: string, userId: string, fileId: string) => {
+  console.log('Downloading image for user ', organisationId, userId, fileId)
+  return http.get<any>(`/${organisationId}/users/${fileId}`);
 };
 
 const findByEmail = (organisationId: string, email: string) => {
@@ -15,7 +25,12 @@ const findByEmail = (organisationId: string, email: string) => {
 };
 
 const create = (organisationId: string, teamId: string, data: IUser) => {
-  return http.post<IUser>(`/${organisationId}/teams/${teamId}/users`, data);
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  }
+  return http.post<IUser>(`/${organisationId}/teams/${teamId}/users`, data, config);
 };
 
 const update = (organisationId: string, id: string, data: IUser) => {
@@ -30,7 +45,8 @@ const remove = (organisationId: string, id: string) => {
 
 const UserService = {
   getAll,
-  get,
+  getUser,
+  getUserImage,
   findByEmail,
   create,
   update,

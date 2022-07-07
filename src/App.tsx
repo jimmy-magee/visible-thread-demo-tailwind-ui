@@ -52,7 +52,7 @@ const App: React.FC = () => {
 
 
   return (
-    <div className="h-full overflow-hidden">
+    <div className="relative bg-gray-50 overflow-auto">
 
         <div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -196,9 +196,8 @@ const App: React.FC = () => {
                                 <div>
                                     <img
                                         className="inline-block h-9 w-9 rounded-full"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt=""
-                                    />
+                                        src={`http://localhost:8080/api/v1/vtdocs/629c0dab4020107806f5af40/users/629f69ec4020107806f5af44/62a8703b4020107806f5af4f/download`}/>
+
                                 </div>
                                 <div className="ml-3">
                                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Liam</p>
@@ -220,14 +219,14 @@ const App: React.FC = () => {
                         <MenuIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div>
-                <main className="flex-1">
+                <main className="flex-1 overflow-auto">
                     <div className="py-6">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <h1 className="text-2xl font-semibold text-gray-900">Medi Docs</h1>
                         </div>
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 overflow-auto">
                             {/* Replace with your content */}
-                            <div className="py-4">
+                            <div className="overflow-auto">
 
                                 <Routes>
 

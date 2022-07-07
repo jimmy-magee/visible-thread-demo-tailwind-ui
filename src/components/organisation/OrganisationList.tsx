@@ -89,6 +89,8 @@ const OrganisationList: React.FC = () => {
         </div>
       </div>
       <div className="col-md-6">
+          <h4> Enterprise Tools & Technology Stacks</h4>
+          <h4>Build Enterprise Solutions with the our cutting edge technology stack</h4>
         <h4>Organisation List</h4>
           <Link to="/organisation/add"> Add Organisation</Link>
 

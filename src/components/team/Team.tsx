@@ -43,8 +43,10 @@ const Team: React.FC = () => {
             image:
                 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
+
         // More people...
     ]
+
     let params = useParams();
 
     useEffect(() => {
@@ -139,11 +141,11 @@ const Team: React.FC = () => {
 
 
     return (
-        <div>
+        <div className="overflow-scroll">
             {currentTeam ? (
 
                 <div className="edit-form">
-                    <Link to={`/${currentTeam.organisationId}/teams/${currentTeam.id}/users`}>Add User</Link>
+                    <Link to={`/${currentTeam.organisationId}/teams/${currentTeam.id}/users`}>Add New User</Link>
 
                     <h4>Team</h4>
                     <form>
@@ -222,11 +224,11 @@ const Team: React.FC = () => {
 
                                     </div>
                                 </div>
-                                <div className="mt-8 flex flex-col">
+                                <div className="mt-8 flex flex-col overflow-visible">
                                     <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                             <div
-                                                className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                                                className="overflow-visible shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                                                 <table className="min-w-full divide-y divide-gray-300">
                                                     <thead className="bg-gray-50">
                                                     <tr>
@@ -272,6 +274,7 @@ const Team: React.FC = () => {
                                                                 <div className="text-gray-900">{person.title}</div>
                                                                 <div className="text-gray-500">{person.department}</div>
                                                             </td>
+
                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <span
                             className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
@@ -285,6 +288,7 @@ const Team: React.FC = () => {
                                                                     Edit<span className="sr-only">, {person.name}</span>
                                                                 </a>
                                                             </td>
+
                                                         </tr>
                                                     ))}
                                                     </tbody>
@@ -296,9 +300,9 @@ const Team: React.FC = () => {
                             </div>
 
 
-                            <div>
+                            <div className="overflow-auto">
                                 <div>
-                                    <table className="min-w-full divide-y divide-gray-300">
+                                    <table className="min-w-full  divide-y divide-gray-300 overflow-scroll">
                                         <thead className="bg-gray-50">
                                         <tr>
                                             <th scope="col"
@@ -322,6 +326,12 @@ const Team: React.FC = () => {
                                         <tbody className="divide-y divide-gray-200 bg-white">
                                         {currentTeam.users.map((user, index) => (
                                             <tr key={user.id}>
+                                                <td>
+                                                    <div className="h-10 w-10 flex-shrink-0">
+                                                        <img className="h-10 w-10 rounded-full"
+                                                             src={`http://localhost:8080/api/v1/vtdocs/629c0dab4020107806f5af40/users/629f69ec4020107806f5af44/62a8703b4020107806f5af4f/download`} alt="hello"/>
+                                                    </div>
+                                                </td>
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                     {user.firstname}
                                                 </td>
@@ -335,6 +345,7 @@ const Team: React.FC = () => {
                                                     <button onClick={() => removeUserFromTeam(user.id)}>Delete</button>
 
                                                 </td>
+
                                             </tr>
                                         ))}
                                         </tbody>
